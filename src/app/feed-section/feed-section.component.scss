@@ -1,0 +1,30 @@
+.header-container{
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.logo-container{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: fit-content;
+    gap: .5rem;
+}
+ .logo-container span{
+    font-size: .3rem;
+    color: white;
+
+ }
+.logo{
+  fill: white;
+    object-fit: contain;
+    outline: 2px red solid;
+}
+
+.icon-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding:1rem;
+}

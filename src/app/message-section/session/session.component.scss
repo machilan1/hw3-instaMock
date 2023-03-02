@@ -1,0 +1,25 @@
+.container{
+    padding: .2rem 1rem;
+    display: flex;
+    width: 100%;
+    // outline:solid 2px red
+}
+img{
+    max-width: 3rem;
+    border-radius: 1000px;    
+}
+
+.session-info {
+    font-size: .9rem;
+    margin: auto 0;
+    padding: 0 .5rem;
+    width: 100%;
+}
+.lastSent{
+    color: rgb(170, 170, 170);
+}
+
+
+.icon-area{
+    margin: auto 0;
+}
