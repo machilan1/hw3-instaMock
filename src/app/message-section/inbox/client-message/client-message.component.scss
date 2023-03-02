@@ -1,0 +1,25 @@
+p{
+    max-width: 80%;
+    display: inline-block;
+   
+}
+.reciever, .client{
+    display: flex;
+    margin: .4rem 0;
+}
+.client{
+    justify-content: end;
+}
+
+.client p, .reciever p{
+    padding: .5rem .8rem;
+    border-radius: 17px;
+}
+.client p{
+    background-color: rgb(71, 71, 71);
+}
+
+
+.reciever p{
+    border: 1px solid rgb(78, 78, 78);
+}

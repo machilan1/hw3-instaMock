@@ -4,6 +4,9 @@
 .inbox{
     background-color: rgb(0, 0, 0);
     width: 100%;
+    position: fixed;
+    right: -100%;
+    transition: .3s;
 }
 
 
@@ -100,4 +103,8 @@ header >h2{
     font-weight: bold;
     color: rgb(200, 200, 200);
     ;    
+}
+
+.activated{
+    right:0
 }

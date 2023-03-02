@@ -5,5 +5,6 @@ import { Subject } from "rxjs";
 export class InboxService{
     recieverEmmitter =new Subject<any>();
     
-    messageUpdateEmmiter= new Subject<boolean>
+    messageUpdateEmmiter= new Subject<boolean>;
+    inboxActiveEmmiter= new Subject<boolean>;
 }

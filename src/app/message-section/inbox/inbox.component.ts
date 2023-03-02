@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl,FormGroup,ReactiveFormsModule } from '@angular/forms';
+import { FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { InboxService } from 'src/app/share/messenger/inbox.service';
 import { UserService } from 'src/app/share/users/users.service';
 import { Subscription} from 'rxjs';
@@ -41,7 +41,7 @@ export class InboxComponent implements OnInit, OnDestroy{
    
 
     this.submitForm = new FormGroup({
-    'content': new FormControl(null)
+    'content': new FormControl(null,Validators.required)
   })
 
 
@@ -71,10 +71,19 @@ export class InboxComponent implements OnInit, OnDestroy{
 
   onSubmit(){
 // append a new message 
-  this.getSessionID();
-  this.messengerService.appendMessage(this.sessionID,this.submitForm.value.content,this.clientID,'999')
-  this.submitForm.reset()
-  this.inboxService.messageUpdateEmmiter.next(true);
+    if(this.submitForm.status=="VALID"){
+      this.getSessionID();
+      this.messengerService.appendMessage(this.sessionID,this.submitForm.value.content,this.clientID,'999')
+      this.submitForm.reset()
+      this.inboxService.messageUpdateEmmiter.next(true);
+    }
+
+ 
+
+  }
+
+  onReturn(){
+    this.inboxService.inboxActiveEmmiter.next(false);
   }
 
 }

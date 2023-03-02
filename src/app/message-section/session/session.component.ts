@@ -44,8 +44,8 @@ export class SessionComponent implements OnInit, OnDestroy{
   }
 
   onClick(){
-    console.log('clicked')
-    this.inboxService.recieverEmmitter.next(this.recieverID)
+    this.inboxService.recieverEmmitter.next(this.recieverID);
+    this.inboxService.inboxActiveEmmiter.next(true);
   }
 
 

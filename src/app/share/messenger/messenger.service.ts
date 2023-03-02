@@ -14,7 +14,6 @@ ngOnInit(): void {
 
 appendMessage(sessionID:String, content:String,sender:String,timeStamp:string){
     const sessionIndex = this.sessions.findIndex(session=>session.sessionID==sessionID)
-    console.log("seID :" + sessionID);
     this.sessions[sessionIndex].messages.push({sender:sender,content:content,timeStamp:timeStamp})
 }
 

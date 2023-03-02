@@ -24,11 +24,9 @@ recieverID!: String;
 ngOnInit(): void {
   this.recieverSub = this.inboxService.recieverEmmitter.pipe(
     tap(ID=> this.recieverID=ID),
-    tap(x=>this.getMessages()),
-    tap(x=>console.log(this.messages)),
+    tap(x=>this.getMessages())
     ).subscribe()
   this.clientID = this.clientService.currentClientID
-  // this.messages = this.messengerService.sessions.filter(session => (session.participant.includes(this.clientID)&&session.participant.includes(this.recieverID)))[0].messages
 }
 
 getMessages(){

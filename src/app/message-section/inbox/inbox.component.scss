@@ -3,9 +3,17 @@
 }
 
 .container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    height:100vmax;
+}
+header{
+    width: 100vw;
+    display: flex;
     padding: .5rem 1rem;
-    outline: 1px yellow solid;
+    background-color: black;
 }
 
 img{
@@ -16,8 +24,9 @@ img{
 
 span{
     margin: auto 0;
-    font-size: 1rem;
-    margin-right: 1rem;
+    font-size: 1.2rem;
+    margin: auto 0;
+    padding:0 .5rem;
 }
 
 .right-side{
@@ -45,9 +54,6 @@ span{
     font-size: .75rem;
 }
 
-header{
-    display: flex;
-}
 
 .icon-container{
     display: flex;
@@ -59,12 +65,26 @@ li{
     margin: auto 0;
 }
 
+.chats-container{
+    padding: 0 1rem;
+    overflow: scroll;
+    height: 100%;
+}
+
 
 .input-left{
     display: flex;
     width: 100%;
     gap: .2rem;
 }
+
+
+.input-wrap{
+    padding: 1rem;
+    width: 100%;
+    background-color: black;
+}
+
 .input-container{
     padding: .2rem;
     display: flex;
@@ -75,11 +95,11 @@ li{
 
 
 .camera-btn{
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
     border-radius: 100px;
     background-color: rgb(45, 150, 219);
 }
@@ -94,7 +114,6 @@ li{
     background-color: transparent;
 
 }
-
 .sendbox::placeholder{
     color: #c8c8c8;
 }
