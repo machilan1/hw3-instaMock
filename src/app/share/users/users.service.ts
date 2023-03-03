@@ -3,7 +3,14 @@ import { User } from "./user.model";
 @Injectable({providedIn:'root'})
 
 export class UserService {
-    
+
+
+
+    getProfilePicByID(ID:String){
+        let userPic = this.users.filter((user)=>user.userID===ID)[0].profilePicture
+        return userPic
+    }
+
     users:User[]=[
         {
             userID:'leo369',
@@ -16,7 +23,7 @@ export class UserService {
     
         {
             userID:'official.louis',
-            nameDisplay:'Louis',
+            nameDisplay:'GameFreakLouis',
             story:'Tokyo -> New York -> Taipei',
             profilePicture:'./assets/img/profilePic/b2.jpg',
             isOnline:false,
@@ -25,7 +32,7 @@ export class UserService {
     
         {
             userID:'terrisa.1994',
-            nameDisplay:'Princess Terrisa',
+            nameDisplay:'Terrisa<3',
             story:'Cats <3  Dogs :(',
             profilePicture:'./assets/img/profilePic/g1.jpg',
             isOnline:false,
@@ -42,8 +49,8 @@ export class UserService {
         },
     
         {
-            userID:'ncku.asheley',
-            nameDisplay:'ncku.asheley',
+            userID:'tainan.jolin',
+            nameDisplay:'東區蔡依林',
             story:'Sleep once. Awake twice.',
             profilePicture:'/assets/img/profilePic/g3.jpg',
             isOnline:false,

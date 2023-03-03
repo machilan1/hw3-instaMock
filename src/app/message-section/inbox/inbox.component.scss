@@ -1,3 +1,6 @@
+* ::-webkit-scrollbar{
+    display: none;
+}
 *{
     color: white;
 }
@@ -10,7 +13,7 @@
     height:100vmax;
 }
 header{
-    width: 100vw;
+    width: 100%;
     display: flex;
     padding: .5rem 1rem;
     background-color: black;
@@ -25,7 +28,6 @@ img{
 span{
     margin: auto 0;
     font-size: 1.2rem;
-    margin: auto 0;
     padding:0 .5rem;
 }
 
@@ -67,7 +69,7 @@ li{
 
 .chats-container{
     padding: 0 1rem;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 100%;
 }
 
@@ -110,6 +112,7 @@ li{
 
 }
 .sendbox{
+    width: 100%;
     display: block;
     background-color: transparent;
 

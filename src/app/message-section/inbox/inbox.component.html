@@ -1,15 +1,12 @@
 <div class="container">
     <header>
-        <span (click)="onReturn()" ><i class="fa-solid fa-chevron-left"></i></span>
+        <span (click)="onReturn()" style="cursor: pointer;"><i class="fa-solid fa-chevron-left"></i></span>
         <div class="right-side">
             <div class="reciever-info-container">
-                <!-- <img src="./assets/img/profilePic/b1.jpg" alt=""> -->
                 <img [src]="recieverPicture" alt="">
                 <div class="reciever-info">
                     <p class="reciever-Disp">{{recieverDisplay}}</p>
-                    <!-- <p class="reciever-Disp">Louis</p> -->
                     <p class="reciever-ID">{{recieverID}}</p>
-                    <!-- <p class="reciever-ID">official.louis</p> -->
                 </div>
             </div>
             

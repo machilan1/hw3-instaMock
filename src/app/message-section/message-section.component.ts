@@ -7,6 +7,7 @@ import { ChatSession } from '../share/messenger/chat-session.model';
 import { InboxComponent } from './inbox/inbox.component';
 import { InboxService } from '../share/messenger/inbox.service';
 import {Subscription} from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-message-section',
   standalone: true,
@@ -17,7 +18,8 @@ import {Subscription} from 'rxjs';
 export class MessageSectionComponent implements OnInit, OnDestroy{
   constructor(private messengerService:MessengerService,
             private clientService:ClientService,
-            private inboxService:InboxService
+            private inboxService:InboxService,
+            private router:Router
             ){  }
 
 
@@ -28,7 +30,7 @@ export class MessageSectionComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.inboxActiveSub = this.inboxService.inboxActiveEmmiter.subscribe(bool => this.inboxActive=bool);
-    this.sessionList = this.messengerService.sessions;
+    this.sessionList = this.messengerService.sessions.filter(session=>session.participant.includes(this.clientUserID));
   }
   
 
@@ -36,7 +38,9 @@ export class MessageSectionComponent implements OnInit, OnDestroy{
     this.inboxActiveSub.unsubscribe()
   }
 
-  
+  onClickChev(){
+    this.router.navigate(['home'])
+  }
 
 }
 

@@ -1,0 +1,106 @@
+
+* {
+  color: white;
+  font-size: .8rem;
+}
+.container{
+    background-color: black;
+  width: 100%;  
+  padding: 1rem 0;
+}
+header{
+    padding: .5rem 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.header-left{
+    display: flex;
+    gap: .2rem;
+}
+.header-right{
+    margin: auto 0;
+}
+
+.header-icon-area{
+    display: flex;
+}
+.author-ID{
+    font-weight: bold;
+}
+.author-info{
+    margin: auto 0;
+}
+.author-pic{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100px;
+}
+
+.post-pic > img{
+    width: 100%;
+    min-height: 100vw;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.post-stat-container{
+    padding: 0 1rem;
+}
+.functional-icon-container{
+    padding: .3rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+.functional-icon-container svg ,
+.bookmark-icon-area{
+    margin: auto 0;
+}
+.bookmark-icon-area > i{
+    font-size: 1.2rem;
+}
+
+.content-icon-area{
+    display: flex;
+    gap:.5rem;
+}
+.commenter{
+    font-weight: bold;
+}
+.likes{
+    font-weight: bold;
+    padding: 0 0 .25rem 0;
+}
+.post-content{
+    padding: .25rem 0;
+}
+.extend{
+    color:rgb(146, 146, 146);
+    padding: 0 0 .25rem 0;
+}
+
+.translate{
+    font-size: .7rem;
+}
+.translate .timestamp{
+    color: #c8c8c8;
+}
+
+.comment-input-container{
+    padding: .5rem 0;
+    display: flex;
+    gap:.2rem;
+}
+.comment-input{
+    background-color: transparent;
+    width: 100%;
+}
+
+.comment-input::placeholder{
+    color:white;
+}
+
+.client-pic{
+    width: 1.4rem;
+    border-radius: 100px;
+}
