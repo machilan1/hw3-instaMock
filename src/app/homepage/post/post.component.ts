@@ -54,6 +54,12 @@ export class PostComponent implements OnInit{
   }
 
   onCommentSent(){
+
+    const temp =this.commentService.generateNewComment(this.postID,this.clientID,this.commentForm.value.comment)
+    this.commentService.appendNewComments(temp)
+    const temp2 =this.commentService.getCommentsByPostID(this.postID)
+    console.log(temp2)
+    this.commentTransService.dataForCommentPageRender.next(temp2)
     this.commentForm.reset();
   }
   onCheckComments(){
