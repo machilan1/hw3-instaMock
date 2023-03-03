@@ -6,5 +6,7 @@ export class CommentTransService{
 
     commentPageActive = new Subject<boolean>
     commentDataFetch = new Subject<Reply[]>
+    dataForCommentPageRender = new Subject<Reply[]>
     postIDFetch = new Subject<String>
+    newCommentAppended  = new Subject<Boolean>
 }

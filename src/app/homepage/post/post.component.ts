@@ -7,6 +7,7 @@ import { ReactiveFormsModule ,FormControl, FormGroup, Validators } from '@angula
 import { CommentService } from 'src/app/share/posts/comment.service';
 import { Reply } from 'src/app/share/posts/comment.model';
 import { CommentTransService } from 'src/app/share/transmiter/comment-trans.service';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -23,6 +24,8 @@ export class PostComponent implements OnInit{
               ){}
   @Input() post!:Post 
 
+
+  private updateRenderDataSub!:Subscription;
   comments!:Reply[];
   authorImg!:String;
   clientID!:String;
@@ -40,16 +43,28 @@ export class PostComponent implements OnInit{
     this.clientImg = this.userService.users.filter((user)=>user.userID===this.clientID)[0].profilePicture
     this.comments = this.commentService.comments.filter(comment=>comment.postID===this.post.postID)
     this.postID = this.post.postID;
+    // Subscrib to renderdata so it reloads automatically//
+    this.updateRenderDataSub = this.commentTransService.dataForCommentPageRender.pipe(
+      tap(x=>
+        this.comments = this.commentService.comments.filter(comment=>comment.postID===this.post.postID)
+        )
+      
+      ).subscribe()
+    //////////////
   }
 
   onCommentSent(){
     this.commentForm.reset();
   }
   onCheckComments(){
+    // switch on comment page
     this.commentTransService.commentPageActive.next(true);
-    this.commentTransService.commentDataFetch.next(this.comments);
+    //render post-wise comment data
+    this.commentTransService.dataForCommentPageRender.next(this.comments);
+    
+    //passing current post id
     this.commentTransService.postIDFetch.next(this.postID);
-    console.log(this.postID)
+    console.log(this.comments)
   }
 
 

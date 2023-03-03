@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentTransService } from 'src/app/share/transmiter/comment-trans.service';
+import { CommentService } from 'src/app/share/posts/comment.service';
 import { Reply } from 'src/app/share/posts/comment.model';
 import { Subscription} from'rxjs'
 import { tap } from'rxjs/operators'
@@ -22,7 +23,8 @@ export class CommentPageComponent implements OnInit, OnDestroy{
     private commentTransService :CommentTransService,
     private postService:PostService,
     private userService:UserService,
-    private clientService:ClientService
+    private clientService:ClientService,
+    private commentService :CommentService
   ){}
 
   private commentsSub!:Subscription
@@ -32,13 +34,13 @@ export class CommentPageComponent implements OnInit, OnDestroy{
   pageActive:Boolean=false;
   comments:Reply[]=[];
   postID:String='';
-  post!:Post;
+  post:Post=this.postService.posts[0]
   authorPic!:String;
   clientID!:String;
   clientPic!:String;
   commentForm!:FormGroup;
 ngOnInit(): void {
- this.commentsSub= this.commentTransService.commentDataFetch.pipe(
+ this.commentsSub= this.commentTransService.dataForCommentPageRender.pipe(
    tap(comments=>this.comments=comments),
     ).subscribe()
 
@@ -65,6 +67,35 @@ getPicByComment(comment:Reply){
 
 onReturn(){
   this.commentTransService.commentPageActive.next(false)
+}
+
+
+onSubmitComment(){
+
+  //Append new comment into database
+  if(this.commentForm.status==='VALID'){
+    const temp:Object = {
+      content:this.commentForm.value.comment,
+      senderID:this.clientID,
+      postID:this.postID
+    } 
+    
+      this.commentService.appendNewComments(
+        this.commentService.generateNewComment(this.postID,this.clientID,this.commentForm.value.comment)
+      )
+  
+    this.commentForm.reset()
+        this.commentTransService.newCommentAppended.next(true)
+
+
+    // Render Changes
+    this.commentTransService.dataForCommentPageRender.next(
+      this.commentService.comments.filter(comment=>comment.postID===this.postID)
+    )
+
+
+
+  }
 }
 
 ngOnDestroy(): void {

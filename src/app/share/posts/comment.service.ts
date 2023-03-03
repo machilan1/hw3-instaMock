@@ -48,7 +48,31 @@ comments:Reply[]=[
 
 
 // under development below//
-getComments(){} 
-updateComments(){}
+
+
+    appendNewComments(comment:Reply){
+        this.comments.push(comment)
+    }
+
+    generateValidCommentID(postID:String){
+        const temp =`${postID}-${this.getCommentsByPostID(postID).length+1}`
+        return temp
+    }
+
+    getCommentsByPostID(postID:String){
+        return this.comments.filter(comment=>comment.postID===postID);
+    }
+
+    generateNewComment(postID:String, commenterID:String,content:String){
+
+        return {
+                commentID:this.generateValidCommentID(postID),
+                postID:postID,
+                commenterID:commenterID,
+                content:content,
+                likes:0,
+                likedByClient:false
+                }
+    }
 
 }
