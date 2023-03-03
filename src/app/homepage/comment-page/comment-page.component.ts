@@ -39,7 +39,7 @@ export class CommentPageComponent implements OnInit, OnDestroy{
   commentForm!:FormGroup;
 ngOnInit(): void {
  this.commentsSub= this.commentTransService.commentDataFetch.pipe(
-   tap(com=>this.comments=com),
+   tap(comments=>this.comments=comments),
     ).subscribe()
 
   this.postIDSub = this.commentTransService.postIDFetch.pipe(

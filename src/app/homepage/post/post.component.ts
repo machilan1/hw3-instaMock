@@ -38,7 +38,7 @@ export class PostComponent implements OnInit{
     this.authorImg = this.userService.users.filter(user=>user.userID===this.post.authorID)[0].profilePicture
     this.clientID = this.clientService.currentClientID;
     this.clientImg = this.userService.users.filter((user)=>user.userID===this.clientID)[0].profilePicture
-    this.loadComments();
+    this.comments = this.commentService.comments.filter(comment=>comment.postID===this.post.postID)
     this.postID = this.post.postID;
   }
 
@@ -49,9 +49,8 @@ export class PostComponent implements OnInit{
     this.commentTransService.commentPageActive.next(true);
     this.commentTransService.commentDataFetch.next(this.comments);
     this.commentTransService.postIDFetch.next(this.postID);
+    console.log(this.postID)
   }
 
-  loadComments(){
-    this.comments = this.commentService.comments.filter(comment=>comment.postID===this.post.postID)
-  }
+
 }

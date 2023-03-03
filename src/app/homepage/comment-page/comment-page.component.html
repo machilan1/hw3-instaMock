@@ -47,7 +47,7 @@
 
     <div class="input-container">
         <!-- <img [src]="clientPic"  alt=""> -->
-        <img class="client-pic" src="/assets/img/profilePic/b1.jpg"  alt="">
+        <img class="client-pic" [src]="clientPic"  alt="">
         <form [formGroup]="commentForm" class="reply-input-container">
             <input formControlName="comment" class="reply-input" type="text" placeholder="以 #clientID# 新增留言......">
         </form>
