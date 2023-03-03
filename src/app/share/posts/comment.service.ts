@@ -43,6 +43,13 @@ comments:Reply[]=[
         content:"So happy for you! 😍",
         likes:2,
         likedByClient:true
+    },
+    {   commentID:"4-1",
+        postID:"4",
+        commenterID:"terrisa.1994",
+        content:"I love seeing the joy on kids' faces when they're exploring the world. So glad you got to share that with her! 🌎👧❤️",
+        likes:1,
+        likedByClient:true
     }
 ]
 

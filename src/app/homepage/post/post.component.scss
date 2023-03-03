@@ -39,8 +39,8 @@ header{
 
 .post-pic > img{
     width: 100%;
-    min-height: 100vw;
-    object-fit: cover;
+    max-height: 120vw;
+    object-fit:cover;
     object-position: center center;
 }
 
@@ -92,14 +92,21 @@ header{
     gap:.2rem;
 }
 .comment-input{
+    padding: 0 .5rem;
     background-color: transparent;
     width: 100%;
+    outline: 1px solid transparent;
+    transition: .3s;
 }
 
 .comment-input::placeholder{
     color:white;
 }
 
+.comment-input:focus{
+    outline: 1px solid rgb(75, 75, 75);
+    border-radius: 100px;
+}
 .client-pic{
     width: 1.4rem;
     border-radius: 100px;

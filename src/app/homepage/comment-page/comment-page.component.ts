@@ -48,7 +48,7 @@ ngOnInit(): void {
     tap(ID=>this.postID=ID),
     tap(ID=>this.post = this.postService.posts.filter((post)=>post.postID===ID)[0]),
     tap(ID=>this.authorPic = this.userService.users.filter(user=>user.userID===this.post.authorID)[0].profilePicture),
-    tap(ID=> console.log(this.comments))
+  
 
     ).subscribe()
 

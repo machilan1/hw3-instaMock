@@ -54,14 +54,15 @@ export class PostComponent implements OnInit{
   }
 
   onCommentSent(){
+    if(this.commentForm.status==="VALID"){
+      const temp =this.commentService.generateNewComment(this.postID,this.clientID,this.commentForm.value.comment)
+      this.commentService.appendNewComments(temp)
+      const temp2 =this.commentService.getCommentsByPostID(this.postID)
+      this.commentTransService.dataForCommentPageRender.next(temp2)
+      this.commentForm.reset();
+    }
+    }
 
-    const temp =this.commentService.generateNewComment(this.postID,this.clientID,this.commentForm.value.comment)
-    this.commentService.appendNewComments(temp)
-    const temp2 =this.commentService.getCommentsByPostID(this.postID)
-    console.log(temp2)
-    this.commentTransService.dataForCommentPageRender.next(temp2)
-    this.commentForm.reset();
-  }
   onCheckComments(){
     // switch on comment page
     this.commentTransService.commentPageActive.next(true);
@@ -70,7 +71,7 @@ export class PostComponent implements OnInit{
     
     //passing current post id
     this.commentTransService.postIDFetch.next(this.postID);
-    console.log(this.comments)
+    // console.log(this.comments)
   }
 
 
