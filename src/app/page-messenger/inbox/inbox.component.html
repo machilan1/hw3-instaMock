@@ -1,12 +1,12 @@
 <div class="container">
     <header>
-        <span  style="cursor: pointer;"><i class="fa-solid fa-chevron-left"></i></span>
+        <span   style="cursor: pointer;"><i class="fa-solid fa-chevron-left"></i></span>
         <div class="right-side">
             <div class="reciever-info-container">
-                <img  alt="recieverPIC">
+                <img  [src]="recieverPic"  alt="recieverPIC">
                 <div class="reciever-info">
-                    <p class="reciever-Disp">sdfgsdfg</p>
-                    <p class="reciever-ID">RecieverID</p>
+                    <p class="reciever-Disp"></p>
+                    <p class="reciever-ID">recieverID</p>
                 </div>
             </div>
             
@@ -21,8 +21,8 @@
         </div>
     </header>
     
-    <div class="chats-container">
-        <app-client-message></app-client-message>
+    <div *ngFor="let message of session.messages" class="chats-container">
+        <app-client-message ></app-client-message>
     </div>
     <div class="input-wrap">
         <div class="input-container">

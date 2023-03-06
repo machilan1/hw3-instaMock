@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable,OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
+
 @Injectable({ providedIn: 'root' })
-export class UserService {
-  users: User[] = [
+export class UserService{
+
+  private mockUsers: User[] = [
     {
       userID: 'leo369',
       nameDisplay: 'Leo Strat',
@@ -48,4 +51,22 @@ export class UserService {
       lastSeen: '202302211600',
     },
   ];
+  users:User[]=this.mockUsers
+  users$ = new BehaviorSubject<User[]>(this.mockUsers)
+
+  getUserPicByUserID(userID:string){
+    if(userID){
+
+      return this.users.filter(user=>user.userID===userID)[0].profilePicture
+    }else{
+      return ""
+    }
+  }
+  getUserDesplayByUserID(userID:string){
+    return this.users.filter(user=>user.userID===userID)[0].nameDisplay
+  }
+ 
+  getUserObjectByUserID(userID:string){
+    return this.users.filter(user=>user.userID===userID)[0]
+  }
 }

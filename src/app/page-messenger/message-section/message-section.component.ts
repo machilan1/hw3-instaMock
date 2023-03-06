@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InboxComponent } from './inbox/inbox.component';
-import { SessionComponent } from './session/session.component';
+
 
 @Component({
   selector: 'app-message-section',
   standalone: true,
-  imports: [CommonModule,InboxComponent,SessionComponent],
+  imports: [CommonModule,InboxComponent],
   templateUrl: './message-section.component.html',
   styleUrls: ['./message-section.component.scss'],
 })

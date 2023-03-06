@@ -1,0 +1,33 @@
+*{
+    font-size: .9rem;
+   }
+
+   .author-pic,.commenter-pic{
+       display: inline-block;
+       width: 2rem;
+       border-radius: 100px;
+   }
+   
+   
+   .recites{
+       height: 100%;
+       overflow-y: scroll;
+   }
+   .post-recite, .comment-recite{
+       display: flex;
+       gap: .5rem;
+       border: 1px rgb(46, 46, 46) solid;
+       padding: 1rem;
+   }
+   .recite-content-container{
+       width: 100%;
+   }
+   .recite-content{
+       padding: .4rem 0;
+   }
+   
+   .comment-stat-area{
+       display: flex;
+       gap: 1rem;
+       color: rgb(201, 201, 201);
+   }

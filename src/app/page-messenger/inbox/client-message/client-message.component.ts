@@ -1,5 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChatSession } from '../../component-models/chat-session.model';
+import { Message } from '../../component-models/message.model';
+import { ClientService } from 'src/app/data-user/client/client.service';
 @Component({
   selector: 'app-client-message',
   standalone: true,
@@ -8,6 +11,18 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./client-message.component.scss'],
 })
 export class ClientMessageComponent implements OnInit, OnDestroy {
-  ngOnInit(): void {}
+  constructor(
+    private clientService:ClientService
+  ){
+
+  }
+// esse
+  clientID!:string;
+  @Input() message!:Message
+  
+
+  ngOnInit(): void {
+    this.clientID = this.clientService.currentClientID
+  }
   ngOnDestroy(): void {}
 }
