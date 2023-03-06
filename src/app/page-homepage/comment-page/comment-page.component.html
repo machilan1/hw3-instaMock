@@ -17,8 +17,8 @@
         </div>
 
     <!--  -->
-        <ng-container *ngFor="let comment of comments ">
-            <app-comment [comment] ="comment"></app-comment>
+        <ng-container >
+            <app-comment ></app-comment>
         </ng-container>
     </div>
     
@@ -26,7 +26,7 @@
     <div class="input-container">
         <!-- <img [src]="clientPic"  alt=""> -->
         <img class="client-pic"    alt="client-pic">
-        <form [formGroup]="commentForm"  class="reply-input-container">
+        <form   class="reply-input-container">
             <input    formControlName="comment"  class="reply-input" type="text" placeholder="以  新增留言......">
         </form>
     </div>
