@@ -54,10 +54,11 @@ export class CommentService {
 
   comments$ = new BehaviorSubject<Reply[]>(this.mockdata);
 
-  private getCommentsByPostID$(postID: string) {
-    return this.comments$.pipe(
-      map((comments) => comments.filter((comment) => comment.postID === postID))
-    );
+
+
+   getPostComments$ByPostID(postID: string) {
+    return this.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===postID)))
+
   }
   private generateValidCommentID(postID: string) {
     return `${postID}-${this.mockdata.filter(comment=>comment.postID===postID).length}`
@@ -76,10 +77,11 @@ export class CommentService {
 
   }
 
-
   appendNewComment(postID:string,content:string,commenterID:string){
     const comment:Reply = this.generateCommentObject(postID,content,commenterID)
     this.mockdata.push(comment)
     this.comments$.next(this.mockdata)
   }
+
+
 }

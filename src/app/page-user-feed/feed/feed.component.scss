@@ -1,0 +1,29 @@
+.feeds-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  width: 100%;
+}
+.feed-picture {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+li{
+    list-style-type: none;
+}
+main{
+  width: 100%;
+  height: 100%;
+}
+
+.main-nav-area > ul {
+  padding: 0;
+  display: flex;
+}
+.main-nav-area > ul >li{
+  width: 100%;
+  text-align: center;
+  padding: .5rem 0;
+}

@@ -26,7 +26,7 @@ export class MessageSectionComponent implements OnInit,OnDestroy{
   sessions$ = this.messageService.sessions$.pipe(map(sessions=>sessions.filter(session=>session.participant.includes(this.clietService.currentClientID))))
   active$ = this.messengerStatusService.messengerActive$
   active:boolean=false;
-
+  clientID$ = this.clietService.currentClientID$
   // subs
   destroy$ = new Subject<boolean>
   ngOnInit(){
