@@ -5,9 +5,9 @@ import { PostComponent } from './post/post.component';
 import { PostService } from './component-services/post.service';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { Post } from './component-models/post.model';
-import { User } from '../data-user/users/user.model';
 import { ClientService } from '../data-user/client/client.service';
 import { HomeStatusService } from './component-services/home-status.services';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -19,22 +19,22 @@ export class HomepageComponent implements OnInit, OnDestroy {
   constructor(
     private postService: PostService,
     private clientService: ClientService,
-    private homeStatusService:HomeStatusService
+    private homeStatusService:HomeStatusService,
+    private routes:Router
     ) {}
 
   // esse
+  clientPic$ = this.clientService.clientPic$
   active!:boolean;
-  posts$!: Observable<Post[]>;
-  clientID$!: Observable<string>;
+  clientID$ = this.clientService.currentClientID$
   commentPageActive$!:Observable<boolean>
+  posts$ = this.postService.posts$
   //subs
   activeSub!:Subscription;
   //
-    destroy$ = new Subject<boolean>;
+  destroy$ = new Subject<boolean>;
 
   ngOnInit(): void {
-    this.posts$ = this.postService.posts$
-    this.clientID$ = this.clientService.currentClientID$
 
     this.activeSub = this.homeStatusService.commentPageActive$
     .pipe(
@@ -48,6 +48,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   onCheckMessage(){
-    
+    this.routes.navigate(['message'])
   }
 }

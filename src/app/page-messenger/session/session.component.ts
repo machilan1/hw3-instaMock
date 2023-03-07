@@ -23,12 +23,11 @@ export class SessionComponent  implements OnInit{
   ){}
 @Input()session!:ChatSession
 
-    recieverID$ = this.messengerService.sessions$.pipe(map(sessions=>sessions.filter(session=>session.sessionID ===this.session.sessionID)[0].participant.filter(user=>user!==this.clientService.currentClientID)[0]),tap(x=>console.log(x)))
+    recieverID$ = this.messengerService.sessions$.pipe(map(sessions=>sessions.filter(session=>session.sessionID ===this.session.sessionID)[0].participant.filter(user=>user!==this.clientService.currentClientID)[0]))
     recieverPic$ = this.recieverID$.pipe(map(ID=>this.userService.getUserPicByUserID(ID)))
     lastMessage$ = this.messengerService.sessions$.pipe(map(sessions=>sessions.filter(session=>session.sessionID===this.session.sessionID)[0].messages[this.session.messages.length-1].content))
 
 ngOnInit(): void {
-  console.log(this.recieverID$)
 }
 onClick(){
   this.messengerStatusService.messengerActive$.next(true)

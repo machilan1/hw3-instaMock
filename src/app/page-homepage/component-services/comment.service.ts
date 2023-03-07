@@ -1,9 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
 import { Reply } from '../component-models/comment.model';
+import { PostService } from './post.service';
+import { map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
-export class CommentService  {
-  private mockdata: Reply[] = [
+export class CommentService {
+  constructor(private postService: PostService) {}
+
+   mockdata: Reply[] = [
     {
       commentID: '1-1',
       postID: '1',
@@ -48,5 +52,34 @@ export class CommentService  {
     },
   ];
 
-  comments$ = new BehaviorSubject<Reply[]>(this.mockdata)
+  comments$ = new BehaviorSubject<Reply[]>(this.mockdata);
+
+  private getCommentsByPostID$(postID: string) {
+    return this.comments$.pipe(
+      map((comments) => comments.filter((comment) => comment.postID === postID))
+    );
+  }
+  private generateValidCommentID(postID: string) {
+    return `${postID}-${this.mockdata.filter(comment=>comment.postID===postID).length}`
+  }
+
+  private generateCommentObject(postID:string,content:string,commenterID:string):Reply{
+
+    return{
+      commentID: this.generateValidCommentID(postID),
+      postID: postID,
+      commenterID:commenterID,
+      content:content,
+      likes:0,
+      likedByClient:false
+    }
+
+  }
+
+
+  appendNewComment(postID:string,content:string,commenterID:string){
+    const comment:Reply = this.generateCommentObject(postID,content,commenterID)
+    this.mockdata.push(comment)
+    this.comments$.next(this.mockdata)
+  }
 }

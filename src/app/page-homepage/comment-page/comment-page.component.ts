@@ -27,7 +27,12 @@ export class CommentPageComponent implements OnInit,OnDestroy{
     private userService:UserService
   ) {}
 
- post$ = this.homeStatusService.currentPost$
+ commentForm = new FormGroup({
+   'comment' :new FormControl(null,Validators.required)
+ })
+post!:Post;
+ post$ = this.homeStatusService.currentPost$.pipe(tap(x=>this.post=x))
+
  comments$ = this.post$.pipe(switchMap(post=>this.commentService.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===post.postID)))))
  clientID$ = this.clientService.currentClientID$ 
  clientPic$ = this.clientID$.pipe(switchMap(ID=>this.userService.users$.pipe(map(users=>users.filter(user=>user.userID===ID)[0].profilePicture))))
@@ -39,4 +44,9 @@ export class CommentPageComponent implements OnInit,OnDestroy{
   }
   ngOnDestroy(): void {
   }
-}
+  onSubmitComment(){
+    if(this.commentForm.status=="VALID"){
+      this.commentService.appendNewComment(this.post.postID,this.commentForm.value.comment!,this.clientService.currentClientID)
+      this.commentForm.reset()
+  }
+}}

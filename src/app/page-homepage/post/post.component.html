@@ -33,11 +33,11 @@
                 {{post.content}}
             </div>
             <div class="comment-area">
-                <p (click)="onCheckComment()"  class="extend">查看全部{{commentslength$|async}}則留言</p>
+                <p (click)="onCheckComment()" *ngIf="commentslength$|async;let ste" class="extend">查看全部{{ste}}則留言</p>
             </div>
-            <form  class="comment-input-container">
+            <form [formGroup]="commentForm" class="comment-input-container">
                 <img class="client-pic" [src]="clientPic$|async" alt="clientImg">
-                <input class="comment-input" type="text" placeholder="新增留言......">
+                <input (keydown.enter)="onSubmitComment()"  formControlName="comment"  class="comment-input" type="text" placeholder="新增留言......">
             </form>
         </div>
         <div class="post-footer">

@@ -27,8 +27,8 @@
     <div class="input-container">
         <!-- <img [src]="clientPic"  alt=""> -->
         <img class="client-pic"  [src]="clientPic$|async"  alt="client-pic">
-        <form   class="reply-input-container">
-            <input    class="reply-input" type="text" placeholder="以  新增留言......">
+        <form [formGroup]="commentForm"  class="reply-input-container">
+            <input  (keydown.enter)="onSubmitComment()"  formControlName="comment"  class="reply-input" type="text" placeholder="以 {{clientID$|async}}  新增留言......">
         </form>
     </div>
 </div>
