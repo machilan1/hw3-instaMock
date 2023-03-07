@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
 import { Reply } from '../component-models/comment.model';
 import { PostService } from './post.service';
-import { map } from 'rxjs';
+import { map, tap} from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class CommentService {
   constructor(private postService: PostService) {}
@@ -58,7 +58,6 @@ export class CommentService {
 
    getPostComments$ByPostID(postID: string) {
     return this.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===postID)))
-
   }
   private generateValidCommentID(postID: string) {
     return `${postID}-${this.mockdata.filter(comment=>comment.postID===postID).length}`

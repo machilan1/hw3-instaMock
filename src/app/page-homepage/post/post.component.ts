@@ -1,51 +1,68 @@
-import { Component, Input, OnInit ,OnDestroy} from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { Post } from '../component-models/post.model';
 import { UserService } from 'src/app/data-user/users/users.service';
 import { ClientService } from 'src/app/data-user/client/client.service';
 import { CommentService } from '../component-services/comment.service';
-import { map, Observable} from 'rxjs';
+import { map, Observable ,tap ,BehaviorSubject} from 'rxjs';
 import { HomeStatusService } from '../component-services/home-status.services';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router, RouterLink ,ActivatedRoute,Params } from '@angular/router';
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
-export class PostComponent implements OnInit{
+export class PostComponent implements OnInit {
+  
   constructor(
-    private commentService:CommentService,
-    private userService:UserService,
-    private clientService:ClientService,
-    private homeStatusService:HomeStatusService
-  ) {}
-// esse    
-@Input() post!:Post;
-authorPic!:string;
-  clientPic$:Observable<string>= this.clientService.currentClientID$.pipe(map(id=> this.userService.getUserPicByUserID(id)));
+    private commentService: CommentService,
+    private userService: UserService,
+    private clientService: ClientService,
+    private homeStatusService: HomeStatusService,
+    private route:ActivatedRoute,
+    ) {}
+    @Input() post!: Post;
 
-  commentslength$ = this.commentService.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===this.post.postID).length))
-  commentForm  = new FormGroup(
-    {'comment':new FormControl(null,Validators.required)}
-  )
-ngOnInit(): void {
-  this.authorPic = this.userService.getUserPicByUserID(this.post.authorID)
-}
-// 
+  // esse
+  authorPic!: string;
+  clientPic$: Observable<string> = this.clientService.currentClientID$.pipe(
+    map((id) => this.userService.getUserPicByUserID(id))
+  );
 
-onCheckComment(){
-  this.homeStatusService.commentPageActive$.next(true)
-  this.homeStatusService.currentPost$.next(this.post)
-}
+  // 
+  length$ = new Observable<number>
+  // this.commentService.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===this.post.postID).length,tap(console.log)))
+  // 
+  commentForm = new FormGroup({
+    comment: new FormControl(null, Validators.required),
+  });
 
-onSubmitComment(){
-  if(this.commentForm.status=="VALID"){
-    this.commentService.appendNewComment(this.post.postID,this.commentForm.value.comment!,this.clientService.currentClientID)
-    this.commentForm.reset()
-    
+  ngOnInit(): void {
+    this.authorPic = this.userService.getUserPicByUserID(this.post.authorID);
+    this.length$ = this.commentService.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===this.post.postID).length,tap(console.log)))
+    console.log(this.post)
+
   }
-}
+  //
+
+  onCheckComment() {
+    this.homeStatusService.commentPageActive$.next(true);
+    this.homeStatusService.currentPost$.next(this.post);
+  }
+
+  onSubmitComment() {
+    if (this.commentForm.status == 'VALID') {
+      this.commentService.appendNewComment(
+        this.post.postID,
+        this.commentForm.value.comment!,
+        this.clientService.currentClientID
+      );
+      this.commentForm.reset();
+    }
+  }
+
 }

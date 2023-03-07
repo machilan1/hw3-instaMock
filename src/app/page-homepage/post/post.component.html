@@ -1,11 +1,14 @@
 <div class="container">
     <header>
-        <div class="header-left">
-            <img class="author-pic" [src]="authorPic" alt="author-pic">
-
-            <div class="author-info">
-                <p class="author-ID">{{post.authorID}}</p>
-            </div>
+        <div  >
+            <a class="header-left" [routerLink]="['/feed',post.authorID]" >
+                
+                <img class="author-pic" [src]="authorPic" alt="author-pic">
+                
+                <div class="author-info">
+                    <p class="author-ID">{{post.authorID}}</p>
+                </div>
+            </a>
         </div>
         <div class="header-right">
             <span>
@@ -33,7 +36,7 @@
                 {{post.content}}
             </div>
             <div class="comment-area">
-                <p (click)="onCheckComment()" *ngIf="commentslength$|async;let ste" class="extend">查看全部{{ste}}則留言</p>
+                <p  class="extend">查看全部{{length$|async}}則留言</p>
             </div>
             <form [formGroup]="commentForm" class="comment-input-container">
                 <img class="client-pic" [src]="clientPic$|async" alt="clientImg">

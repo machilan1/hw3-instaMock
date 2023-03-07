@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeedComponent } from './feed/feed.component';
-import { FeedService } from './component-services/feed.service';
-import {BehaviorSubject, map} from 'rxjs'
+import { BehaviorSubject,Subject, map ,Subscription} from 'rxjs';
+import { ActivatedRoute,RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-feed-section',
   standalone: true,
-  imports: [CommonModule,FeedComponent],
+  imports: [CommonModule, FeedComponent,RouterLink],
   templateUrl: './feed-section.component.html',
-  styleUrls: ['./feed-section.component.scss']
+  styleUrls: ['./feed-section.component.scss'],
 })
-export class FeedSectionComponent {
+export class FeedSectionComponent implements OnInit{
   constructor(
-    private feedService :FeedService
-  ){}
-// state
-postIsEmpty$ = new BehaviorSubject<boolean>(true)
-  posts$ = this.feedService.posts$
+    private route:ActivatedRoute
+    ) {}
+  // state
+  testSub = new Subscription
+  userID$ = this.route.params.pipe(map(object=>object['userID']))
+  
+ngOnInit(): void {
+  
+}
 }

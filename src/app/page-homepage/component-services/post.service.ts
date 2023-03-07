@@ -53,7 +53,7 @@ export class PostService {
 
   posts$ = new BehaviorSubject<Post[]>(this.mockPosts)
 
-  getPostsLengthByUserID(userID:string){
-    return this.posts$.pipe(map(posts=>posts.filter(post=>post.authorID===userID)))
+  getPostsLength$ByUserID(userID:string){
+    return this.posts$.pipe(map(posts=>posts.filter(post=>post.authorID===userID).length))
   }
 }
