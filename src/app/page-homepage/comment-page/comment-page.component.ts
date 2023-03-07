@@ -1,15 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {FormControl,FormGroup,ReactiveFormsModule,Validators,} from '@angular/forms';
 import { CommentComponent } from './comment/comment.component';
 import { HomeStatusService } from '../component-services/home-status.services';
 import { CommentService } from '../component-services/comment.service';
-import { map, tap, switchMap, BehaviorSubject } from 'rxjs';
+import { map, tap,of, switchMap, BehaviorSubject, catchError } from 'rxjs';
 import { PostService } from '../component-services/post.service';
 import { ClientService } from 'src/app/data-user/client/client.service';
 import { UserService } from 'src/app/data-user/users/users.service';
@@ -32,12 +27,14 @@ export class CommentPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-
+    commentorID!:string
+    postID!:string
+    content!:string
   commentForm = new FormGroup({
     comment: new FormControl(null, Validators.required),
   });
 
-  // state
+  // states
   commentList$ = this.route.params.pipe(
     map((object) => object['postID']),
     switchMap((postID) => this.commentService.getPostComments$ByPostID(postID))
@@ -45,14 +42,17 @@ export class CommentPageComponent implements OnInit, OnDestroy {
 
   postContent$ = this.route.params.pipe(
     map((object) => object['postID']),
+    tap(postID=>this.postID=postID),
     switchMap((postID) =>
       this.postService.posts$.pipe(
         map(
           (posts) => posts.filter((post) => post.postID === postID)[0].content
-        )
+        ),
+        tap(content=>this.content=content)
       )
     )
-  );
+    ,catchError(err=>of('Content is loading now......'))
+    );
 
   authorPic$ = this.route.params.pipe(
     map((object) => object['postID']),
@@ -64,11 +64,12 @@ export class CommentPageComponent implements OnInit, OnDestroy {
         switchMap((authorID) => this.userService.getUserPic$ByUserID(authorID))
       )
     )
-  );
+  ,catchError(err=>this.clientService.notloadedPic$)
+    );
 
-  
-  clientID$ =this.clientService.currentClientID$
-  clientPic$ = this.clientService.clientPic$
+  clientID$ = this.clientService.currentClientID$.pipe(tap(clientID=>this.commentorID=clientID));
+  clientPic$ = this.clientService.clientPic$;
+
 
   ngOnInit() {}
 
@@ -78,5 +79,11 @@ export class CommentPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  onSubmitComment() {}
+  onSubmitComment() {
+    if(this.commentForm.status=="VALID"){
+      this.commentService.appendNewComment(this.postID,this.commentForm.value.comment!,this.commentorID)
+      console.log(this.postID)
+      this.commentForm.reset()
+    }
+  }
 }

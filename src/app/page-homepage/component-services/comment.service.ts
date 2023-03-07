@@ -79,6 +79,7 @@ export class CommentService {
   appendNewComment(postID:string,content:string,commenterID:string){
     const comment:Reply = this.generateCommentObject(postID,content,commenterID)
     this.mockdata.push(comment)
+    console.log(comment)
     this.comments$.next(this.mockdata)
   }
 

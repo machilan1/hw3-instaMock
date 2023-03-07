@@ -45,7 +45,6 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.authorPic = this.userService.getUserPicByUserID(this.post.authorID);
     this.length$ = this.commentService.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===this.post.postID).length,tap(console.log)))
-    console.log(this.post)
 
   }
   //
