@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject ,map} from 'rxjs';
 import { Post } from '../component-models/post.model';
 
 @Injectable({ providedIn: 'root' })
@@ -53,4 +53,7 @@ export class PostService {
 
   posts$ = new BehaviorSubject<Post[]>(this.mockPosts)
 
+  getPostsLengthByUserID(userID:string){
+    return this.posts$.pipe(map(posts=>posts.filter(post=>post.authorID===userID)))
+  }
 }

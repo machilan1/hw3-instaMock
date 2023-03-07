@@ -1,9 +1,10 @@
-import { Injectable,OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
-export class UserService{
+export class UserService {
+  constructor() {}
 
   private mockUsers: User[] = [
     {
@@ -51,22 +52,34 @@ export class UserService{
       lastSeen: '202302211600',
     },
   ];
-  users:User[]=this.mockUsers
-  users$ = new BehaviorSubject<User[]>(this.mockUsers)
 
-  getUserPicByUserID(userID:string){
-    if(userID){
 
-      return this.users.filter(user=>user.userID===userID)[0].profilePicture
-    }else{
-      return ""
+  users: User[] = this.mockUsers;
+  users$ = new BehaviorSubject<User[]>(this.mockUsers);
+
+
+  getUserPicByUserID(userID: string) {
+    if (userID) {
+      return this.users.filter((user) => user.userID === userID)[0]
+        .profilePicture;
+    } else {
+      return '';
     }
   }
-  getUserDesplayByUserID(userID:string){
-    return this.users.filter(user=>user.userID===userID)[0].nameDisplay
+
+  getUserPic$ByUserID(userID: string) {
+    return this.users$.pipe(
+      map(
+        (users) =>
+          users.filter((user) => user.userID === userID)[0].profilePicture
+      )
+    );
   }
- 
-  getUserObjectByUserID(userID:string){
-    return this.users.filter(user=>user.userID===userID)[0]
+  getUserDesplayByUserID(userID: string) {
+    return this.users.filter((user) => user.userID === userID)[0].nameDisplay;
+  }
+
+  getUserObjectByUserID(userID: string) {
+    return this.users.filter((user) => user.userID === userID)[0];
   }
 }

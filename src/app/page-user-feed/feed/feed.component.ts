@@ -19,7 +19,7 @@ export class FeedComponent implements OnInit{
     ){}
     
     // esse
-    @Input()posts$!:BehaviorSubject<Post[]>
+    @Input()posts$!:Observable<Post[]>
 
 
     ngOnInit(): void {

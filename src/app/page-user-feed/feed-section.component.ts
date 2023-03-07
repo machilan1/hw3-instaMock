@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeedComponent } from './feed/feed.component';
 import { FeedService } from './component-services/feed.service';
-import {map} from 'rxjs'
+import {BehaviorSubject, map} from 'rxjs'
 
 @Component({
   selector: 'app-feed-section',
@@ -15,6 +15,7 @@ export class FeedSectionComponent {
   constructor(
     private feedService :FeedService
   ){}
-
+// state
+postIsEmpty$ = new BehaviorSubject<boolean>(true)
   posts$ = this.feedService.posts$
 }

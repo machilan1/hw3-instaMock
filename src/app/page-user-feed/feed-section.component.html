@@ -54,8 +54,8 @@
         </div>
 
 
-        <div class="feeds-container">
-            <app-feed [posts$]="posts$"> </app-feed>
+        <div class="feeds-container" *ngIf="(posts$|async)!.length!==0">
+            <app-feed  [posts$]="posts$" > </app-feed>
         </div>
 
     </main>
