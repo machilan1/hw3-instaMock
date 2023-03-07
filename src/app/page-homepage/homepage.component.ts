@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CommentPageComponent } from './comment-page/comment-page.component';
 import { PostComponent } from './post/post.component';
 import { PostService } from './component-services/post.service';
-import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
-import { Post } from './component-models/post.model';
+import { Observable, Subject, Subscription, takeUntil, map } from 'rxjs';
 import { ClientService } from '../data-user/client/client.service';
 import { HomeStatusService } from './component-services/home-status.services';
 import { ActivatedRoute, Router ,RouterLink } from '@angular/router';
@@ -20,7 +19,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private clientService: ClientService,
     private homeStatusService: HomeStatusService,
-    private routes: Router
+    private routes: Router,
+    private route:ActivatedRoute
   ) {}
 
   // esse
@@ -30,6 +30,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
   commentPageActive$!: Observable<boolean>;
   posts$ = this.postService.posts$;
   //subs
+
+  active$ = this.route.params.pipe(map(obj => obj['commentsActive']==='comments'))
+
+
   /////
   activeSub!: Subscription;
   //

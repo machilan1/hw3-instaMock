@@ -9,13 +9,11 @@ import {
 import { CommentComponent } from './comment/comment.component';
 import { HomeStatusService } from '../component-services/home-status.services';
 import { CommentService } from '../component-services/comment.service';
-import { map, tap, switchMap } from 'rxjs';
-import { Post } from '../component-models/post.model';
-import { TmplAstElement } from '@angular/compiler';
+import { map, tap, switchMap, BehaviorSubject } from 'rxjs';
 import { PostService } from '../component-services/post.service';
 import { ClientService } from 'src/app/data-user/client/client.service';
 import { UserService } from 'src/app/data-user/users/users.service';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-comment-page',
@@ -31,70 +29,54 @@ export class CommentPageComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private clientService: ClientService,
     private userService: UserService,
-    private route :ActivatedRoute,
-    private router :Router
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   commentForm = new FormGroup({
     comment: new FormControl(null, Validators.required),
   });
 
-
-  post!: Post;
-  post$ = this.homeStatusService.currentPost$.pipe(tap((x) => (this.post = x)));
-
-
-
-  comments$ = this.post$.pipe(
-    switchMap((post) =>
-      this.commentService.comments$.pipe(
-        map((comments) =>
-          comments.filter((comment) => comment.postID === post.postID)
-        )
-      )
-    )
+  // state
+  commentList$ = this.route.params.pipe(
+    map((object) => object['postID']),
+    switchMap((postID) => this.commentService.getPostComments$ByPostID(postID))
   );
-  clientID$ = this.clientService.currentClientID$;
-  clientPic$ = this.clientID$.pipe(
-    switchMap((ID) =>
-      this.userService.users$.pipe(
+
+  postContent$ = this.route.params.pipe(
+    map((object) => object['postID']),
+    switchMap((postID) =>
+      this.postService.posts$.pipe(
         map(
-          (users) =>
-            users.filter((user) => user.userID === ID)[0].profilePicture
+          (posts) => posts.filter((post) => post.postID === postID)[0].content
         )
       )
     )
   );
-  authorPic$ = this.post$.pipe(
-    switchMap((post) =>
-      this.userService.users$.pipe(
+
+  authorPic$ = this.route.params.pipe(
+    map((object) => object['postID']),
+    switchMap((postID) =>
+      this.postService.posts$.pipe(
         map(
-          (users) =>
-            users.filter((user) => user.userID === post.authorID)[0]
-              .profilePicture
-        )
+          (posts) => posts.filter((post) => post.postID === postID)[0].authorID
+        ),
+        switchMap((authorID) => this.userService.getUserPic$ByUserID(authorID))
       )
     )
   );
-  ngOnInit() {}
-
-
-  onReturn() {
-    this.homeStatusService.commentPageActive$.next(false);
-  }
 
   
+  clientID$ =this.clientService.currentClientID$
+  clientPic$ = this.clientService.clientPic$
+
+  ngOnInit() {}
+
+  onReturn() {
+    this.router.navigate(['/home']);
+  }
+
   ngOnDestroy(): void {}
 
-
-  onSubmitComment() {
-    if (this.commentForm.status == 'VALID') {
-      this.commentService.appendNewComment(
-        this.post.postID,
-        this.commentForm.value.comment!,
-        this.clientService.currentClientID
-      );
-      this.commentForm.reset();
-    }
-  }
+  onSubmitComment() {}
 }

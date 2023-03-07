@@ -11,22 +11,21 @@
             </div>
 
             <div class="recite-content-container">
-                <p >{{(post$|async)?.authorID}}</p>
+                <p ></p>
                 
-                <p class="recite-content">{{(post$|async)?.content}}</p>
+                <p class="recite-content">{{postContent$|async}}</p>
             </div>
         </div>
 
-    <!--  -->
-        <ng-container *ngFor="let comment of comments$|async">
-            <app-comment [comment]="comment"></app-comment>
+        <ng-container *ngFor="let comment of commentList$|async">
+            <app-comment [comment]="comment" >loophear</app-comment>
         </ng-container>
-    </div>
+
     
 
     <div class="input-container">
         <!-- <img [src]="clientPic"  alt=""> -->
-        <img class="client-pic"  [src]="clientPic$|async"  alt="client-pic">
+        <img class="client-pic" [src]="clientPic$|async"   alt="client-pic">
         <form [formGroup]="commentForm"  class="reply-input-container">
             <input  (keydown.enter)="onSubmitComment()"  formControlName="comment"  class="reply-input" type="text" placeholder="以 {{clientID$|async}}  新增留言......">
         </form>

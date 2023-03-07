@@ -1,4 +1,4 @@
-<div [style]="{right: active? '0':'-100%'}" class="comment-page">
+<div [style]="{right: (active$|async)? '0':'-100%'}" class="comment-page">
     <app-comment-page></app-comment-page>
 </div>
 <div class="container">
