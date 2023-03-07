@@ -1,10 +1,10 @@
 <div class="container">
     <header>
         <div class="header-left">
-            <img class="author-pic"  alt="author-pic">
+            <img class="author-pic" [src]="authorPic" alt="author-pic">
 
             <div class="author-info">
-                <p class="author-ID">authorID</p>
+                <p class="author-ID">{{post.authorID}}</p>
             </div>
         </div>
         <div class="header-right">
@@ -14,7 +14,7 @@
         </div>
     </header>
     <div class="post-pic">
-        <img  alt="postIMG">
+        <img [src]="post.postImg" alt="postIMG">
     </div>
     <div class="post-stat-container">
         <div class="functional-icon-container">
@@ -28,15 +28,15 @@
             </div>
         </div>
         <div class="post-stat">
-            <p class="likes">post.likes個讚</p>
+            <p class="likes">{{post.likes}}個讚</p>
             <div class="post-content">
-                post.content
+                {{post.content}}
             </div>
             <div class="comment-area">
-                <p   class="extend">查看全部comments.length則留言</p>
+                <p (click)="onCheckComment()"  class="extend">查看全部{{commentslength$|async}}則留言</p>
             </div>
             <form  class="comment-input-container">
-                <img class="client-pic"  alt="clientImg">
+                <img class="client-pic" [src]="clientPic$|async" alt="clientImg">
                 <input class="comment-input" type="text" placeholder="新增留言......">
             </form>
         </div>

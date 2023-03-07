@@ -6,7 +6,8 @@ import { UserService } from 'src/app/data-user/users/users.service';
 import { ClientService } from 'src/app/data-user/client/client.service';
 import { Reply } from '../component-models/comment.model';
 import { CommentService } from '../component-services/comment.service';
-import { Subscription ,takeUntil,tap, BehaviorSubject ,Subject} from 'rxjs';
+import { map, Observable} from 'rxjs';
+import { HomeStatusService } from '../component-services/home-status.services';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -14,10 +15,27 @@ import { Subscription ,takeUntil,tap, BehaviorSubject ,Subject} from 'rxjs';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
-export class PostComponent {
+export class PostComponent implements OnInit{
   constructor(
-
+    private commentService:CommentService,
+    private userService:UserService,
+    private clientService:ClientService,
+    private homeStatusService:HomeStatusService
   ) {}
+// esse    
+@Input() post!:Post;
+authorPic!:string;
+  clientPic$:Observable<string>= this.clientService.currentClientID$.pipe(map(id=> this.userService.getUserPicByUserID(id)));
 
+  commentslength$ = this.commentService.comments$.pipe(map(comments=>comments.filter(comment=>comment.postID===this.post.postID).length))
+  
+ngOnInit(): void {
+  this.authorPic = this.userService.getUserPicByUserID(this.post.authorID)
+}
+// 
 
+onCheckComment(){
+  this.homeStatusService.commentPageActive$.next(true)
+  this.homeStatusService.currentPost$.next(this.post)
+}
 }

@@ -1,33 +1,34 @@
 <div class="container">
     <header>
-        <a   style="cursor: pointer;"><i class="fa-solid fa-chevron-left"></i></a>
+        <a  (click)="onReturn()" style="cursor: pointer;"><i class="fa-solid fa-chevron-left"></i></a>
         <a>留言</a>
         <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" width="24px" height="24px" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} </style> <polygon class="st0" points="28.6,3.4 3.4,12.6 15.1,16.9 22.4,28.6 "></polygon> <line class="st0" x1="28" y1="4" x2="15.1" y2="16.9"></line> </g></svg>
     </header>
     <div class="recites">
         <div class="post-recite">
             <div class="pic-container">
-                <img  class="author-pic"    alt="profilePIC">
+                <img  class="author-pic"  [src]="authorPic$|async"  alt="profilePIC">
             </div>
 
             <div class="recite-content-container">
-                <p>currentPost.authorID</p>
-                <p class="recite-content">currentPost.content</p>
+                <p >{{(post$|async)?.authorID}}</p>
+                
+                <p class="recite-content">{{(post$|async)?.content}}</p>
             </div>
         </div>
 
     <!--  -->
-        <ng-container >
-            <app-comment ></app-comment>
+        <ng-container *ngFor="let comment of comments$|async">
+            <app-comment [comment]="comment"></app-comment>
         </ng-container>
     </div>
     
 
     <div class="input-container">
         <!-- <img [src]="clientPic"  alt=""> -->
-        <img class="client-pic"    alt="client-pic">
+        <img class="client-pic"  [src]="clientPic$|async"  alt="client-pic">
         <form   class="reply-input-container">
-            <input    formControlName="comment"  class="reply-input" type="text" placeholder="以  新增留言......">
+            <input    class="reply-input" type="text" placeholder="以  新增留言......">
         </form>
     </div>
 </div>

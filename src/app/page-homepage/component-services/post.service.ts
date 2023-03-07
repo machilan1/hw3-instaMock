@@ -6,6 +6,8 @@ import { Post } from '../component-models/post.model';
 export class PostService {
   constructor() {}
 
+
+
   private mockPosts: Post[] = [
     {
       postID: '1',
@@ -47,5 +49,8 @@ export class PostService {
       likedByClient: true,
     },
   ];
+
+
+  posts$ = new BehaviorSubject<Post[]>(this.mockPosts)
 
 }

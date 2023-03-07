@@ -9,6 +9,11 @@
     right:-100%;
     transition: .3s;
 }
+
+.comment-page.active{
+    right: 0;
+}
+
 .container{
     background-color: black;
     width: 100%;

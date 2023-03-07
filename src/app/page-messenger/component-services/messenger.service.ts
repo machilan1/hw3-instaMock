@@ -210,4 +210,6 @@ Mocksessions: ChatSession[] = [
 
 ];
 
+
+sessions$ = new BehaviorSubject<ChatSession[]>(this.Mocksessions)
 }

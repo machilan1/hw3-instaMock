@@ -1,12 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
 import { Reply } from '../component-models/comment.model';
 @Injectable({ providedIn: 'root' })
-export class CommentService implements OnInit {
-  constructor() {}
-
-  private commentsSub = new Subscription();
-  private destroySub = new Subscription();
+export class CommentService  {
   private mockdata: Reply[] = [
     {
       commentID: '1-1',
@@ -51,52 +47,6 @@ export class CommentService implements OnInit {
       likedByClient: true,
     },
   ];
-  private currentCommentsData: Reply[] = this.mockdata;
 
-  // data outlet
-  comments$ = new BehaviorSubject<Reply[]>(this.mockdata);
-
-  ngOnInit() {
-    this.currentCommentsData = this.mockdata;
-  }
-
-
-
-  //set outleting data
-  emitCommentsData(comments: Reply[]) {
-    this.comments$.next(comments);
-    this.currentCommentsData = comments;
-  }
-
-  getCommentsByPostID(postID:string){
-    return this.currentCommentsData.filter(comment =>comment.postID===postID)
-  }
-
-
-  generateNewCommentObject(postID:string,commenterID:string,content:string|undefined|null){
-    const temp:Reply = {
-      commentID: this.generateValidCommentID(postID),
-      postID:postID,
-      commenterID:commenterID,
-      content:content,
-      likes:0,
-      likedByClient:false
-    }
-    return temp;
-  }
-
-  appendNewComment(comment: Reply) {
-    this.currentCommentsData.push(comment)
-    this.comments$.next(this.currentCommentsData)
-  }
-  
-
-
-  generateValidCommentID(postID: string) {
-    let temp =
-      this.currentCommentsData.filter((comment) => comment.postID === postID)
-        .length + 1;
-    return `${postID}-${temp}`;
-  }
-
+  comments$ = new BehaviorSubject<Reply[]>(this.mockdata)
 }

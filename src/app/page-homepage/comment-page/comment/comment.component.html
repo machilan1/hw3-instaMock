@@ -3,14 +3,14 @@
     
         <div class="pic-container">
             
-            <img  class="commenter-pic"  alt="profilePIC">
+            <img  class="commenter-pic" [src]="commenterPic$|async" alt="profilePIC">
         </div>
 
         <div class="recite-content-container">
-            <p class="author-name">comment.commenterID</p>
-            <p class="recite-content">comment.content</p>
+            <p class="author-name">{{comment.commenterID}}</p>
+            <p class="recite-content">{{comment.content}}</p>
             <div class="comment-stat-area">
-                <span> comment.likes個讚</span>
+                <span> {{comment.likes}}個讚</span>
                 <span>回復</span>
                 <span>翻譯年糕</span>
             </div>
