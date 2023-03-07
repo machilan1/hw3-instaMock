@@ -24,6 +24,7 @@ export class PostComponent implements OnInit {
     private clientService: ClientService,
     private homeStatusService: HomeStatusService,
     private route:ActivatedRoute,
+    private router:Router,
     ) {}
     @Input() post!: Post;
 
@@ -50,8 +51,12 @@ export class PostComponent implements OnInit {
   //
 
   onCheckComment() {
-    this.homeStatusService.commentPageActive$.next(true);
-    this.homeStatusService.currentPost$.next(this.post);
+    // this.homeStatusService.commentPageActive$.next(true);
+    // this.homeStatusService.currentPost$.next(this.post);
+
+    // 打開
+    this.router.navigate(['/home','comments',this.post.postID])
+    // 找到client的inboxs
   }
 
   onSubmitComment() {

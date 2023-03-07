@@ -36,7 +36,7 @@
                 {{post.content}}
             </div>
             <div class="comment-area">
-                <p  class="extend">查看全部{{length$|async}}則留言</p>
+                <p (click)="onCheckComment()" class="extend">查看全部{{length$|async}}則留言</p>
             </div>
             <form [formGroup]="commentForm" class="comment-input-container">
                 <img class="client-pic" [src]="clientPic$|async" alt="clientImg">
