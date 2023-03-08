@@ -1,6 +1,7 @@
 
-# Recent Patch!!!!!
-Added functionality : Insta-message , PostComment
+# Recent Patch!!!!! 2023/3/8
+Added functionality : Insta-message , PostComment , Personal Feed
+Replace data transmiting fuction with piping method.
 # InstagramClone
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
