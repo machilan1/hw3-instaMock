@@ -48,6 +48,45 @@ export class PostService {
       likes: 17,
       likedByClient: true,
     },
+    {
+      postID: '5',
+      content:
+        "New Season on the way!",
+      authorID: 'adventure.time.official',
+      timeStamp: '123',
+      postImg: './assets/img/postPic/5-1.jpg',
+      likes: 10,
+      likedByClient: true,
+    },
+    {
+      postID: '6',
+      content:
+        "2月7日(火)放送回がPodcastに追加されました！アーカイブでいつでもお聴きいただけます🎧",
+      authorID: 'kazuhisa.uekusa',
+      timeStamp: '123',
+      postImg: './assets/img/postPic/6-1.jpg',
+      likes: -10,
+      likedByClient: true,
+    },
+    {
+      postID: '7',
+      content:"要聽媽媽的話。",
+      authorID: 'jay.chou',
+      timeStamp: '123',
+      postImg: './assets/img/postPic/7-1.jpg',
+      likes: 233,
+      likedByClient: true,
+    },
+    {
+      postID: '8',
+      content:
+        "LOL🤣😂 My goofy little pumpkin ❤ ",
+      authorID: 'terrisa.1994',
+      timeStamp: '123',
+      postImg: './assets/img/postPic/8-1.jpg',
+      likes: 54,
+      likedByClient: true,
+    },
   ];
 
 

@@ -27,7 +27,7 @@ export class UserService {
 
     {
       userID: 'terrisa.1994',
-      nameDisplay: 'Terrisa<3',
+      nameDisplay: 'TerrisaCutie',
       story: 'Cats <3  Dogs :(',
       profilePicture: './assets/img/profilePic/g1.jpg',
       isOnline: false,
@@ -36,7 +36,7 @@ export class UserService {
 
     {
       userID: 'parisam',
-      nameDisplay: '小飛',
+      nameDisplay: 'Maona Lyndsey',
       story: 'Ask before you follow.',
       profilePicture: './assets/img/profilePic/g2.jpg',
       isOnline: false,
@@ -51,6 +51,30 @@ export class UserService {
       isOnline: false,
       lastSeen: '202302211600',
     },
+    {
+      userID: 'jay.chou',
+      nameDisplay: '周杰倫',
+      story: '唉呦，這個屌。',
+      profilePicture: '/assets/img/profilePic/b3.jpg',
+      isOnline: false,
+      lastSeen: '202302211600',
+    },
+    {
+      userID: 'adventure.time.official',
+      nameDisplay: 'Finn & Jake',
+      story: "Adventure Time. Come on grab your friends.We'll go to very distant lands.With Jake the Dog and Finn the Human.The fun will never end, it's Adventure Time",
+      profilePicture: '/assets/img/profilePic/c1.jpg',
+      isOnline: false,
+      lastSeen: '202302211600',
+    },
+    {
+      userID: 'kazuhisa.uekusa',
+      nameDisplay: 'Kazuhisa Uekusa (ウエスP)',
+      story: "ウエスP（Wes-P、うえすぴー、1987年〈昭和62年〉11月15日[1] - ）とは、吉本興業に所属する日本のお笑い芸人（ピン芸人）である。",
+      profilePicture: '/assets/img/profilePic/b4.jpg',
+      isOnline: false,
+      lastSeen: '202302211600',
+    }
   ];
 
 
