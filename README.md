@@ -1,5 +1,5 @@
 
-# Recent Patch!!!!! 2023/3/8
+# Recent Patch 2023/3/8
 Added functionality : Insta-message , PostComment , Personal Feed
 Replace data transmiting fuction with piping method.
 # InstagramClone
