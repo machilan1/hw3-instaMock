@@ -30,7 +30,8 @@ export class CommentPageComponent implements OnInit, OnDestroy {
     commentorID!:string
     postID!:string
     content!:string
-  commentForm = new FormGroup({
+    authorID!:string
+    commentForm = new FormGroup({
     comment: new FormControl(null, Validators.required),
   });
 
@@ -61,6 +62,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
         map(
           (posts) => posts.filter((post) => post.postID === postID)[0].authorID
         ),
+        tap(authorID=>this.authorID=authorID),
         switchMap((authorID) => this.userService.getUserPic$ByUserID(authorID))
       )
     )
