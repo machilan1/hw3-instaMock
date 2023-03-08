@@ -27,6 +27,7 @@ header{
     justify-content: space-between;
 }
 .logo{
+    display: block;
     margin: auto 0;
 }
 
@@ -51,6 +52,9 @@ header{
     gap: 1rem;
 }
 
+.timely{
+    display: block;
+}
 main{
     overflow-y:scroll;
     width: 100%;

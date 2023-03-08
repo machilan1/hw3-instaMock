@@ -1,5 +1,10 @@
-<div class="circle2">
-    <div class="circle">
-        <img src="" alt="">
+<div class="timely">
+  <ng-container *ngFor="let user of userList$ | async">
+    <div class="wrapper">
+      <div class="circle">
+        <img class="circle-pic" [src]="user.profilePicture" alt="123" />
+      </div>
+      <div class="userID">{{ user.userID }}</div>
     </div>
+  </ng-container>
 </div>

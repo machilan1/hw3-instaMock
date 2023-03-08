@@ -7,10 +7,11 @@ import { Observable, Subject, Subscription, takeUntil, map } from 'rxjs';
 import { ClientService } from '../data-user/client/client.service';
 import { HomeStatusService } from './component-services/home-status.services';
 import { ActivatedRoute, Router ,RouterLink } from '@angular/router';
+import { TimelyPostComponent } from './timely-post/timely-post.component';
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [CommonModule, CommentPageComponent, PostComponent,RouterLink],
+  imports: [CommonModule, CommentPageComponent, PostComponent,RouterLink,TimelyPostComponent],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
