@@ -79,10 +79,10 @@ header >h2{
 }
 
 .user-pic{
-    display: inline-flex;
+    display: block;
     aspect-ratio:1/1;
     max-width: 4.5rem;
-    max-height: 4.5 rem;
+    max-height: 4.5rem;
     background-color: wheat;
     object-fit: cover;
     align-content: center center;
@@ -172,6 +172,7 @@ main{
     padding:1rem 2rem
 }
 .footer-icon-client-pic{
+    display: block;
     width: 1.5rem;
     border-radius: 100px;
 }

@@ -56,9 +56,9 @@ userPic$=
     map(object=>object['userID']),
     map(userID=>this.userService.getUserObjectByUserID(userID)['story'])
     )
-
-  clientPic$ = this.clientService.clientPic$
-
+    
+    clientPic$ = this.clientService.clientPic$
+    clientID$ = this.clientService.currentClientID$
 // //////Pending developing
 
   // numOfUserFans$=
